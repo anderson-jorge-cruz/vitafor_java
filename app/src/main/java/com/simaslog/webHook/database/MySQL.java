@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQL {
-    private static final String URL = "jdbc:mysql://216.238.121.35:3306/integradorsm";
+    private static final String URL = "jdbc:mysql://localhost:3306/integradorsm";
     private static final String USER = "root";
     private static final String PASSWORD = "integradorsm@2024";
 
