@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class WebHookHandler {
 
     @CrossOrigin(origins = {"https://wms.simaslog.com.br/*", "https://wmshml.simaslog.com.br/*"})
-    @RequestMapping(value = "vitafor",method =  RequestMethod.POST)
+    @RequestMapping(value = "webhook",method =  RequestMethod.POST)
     public ResponseEntity<Void> store(HttpServletRequest request, HttpServletResponse response) throws JSONException, SQLException, ClassNotFoundException {
         StringBuilder body = new StringBuilder();
         try (BufferedReader reader = request.getReader()) {
@@ -30,6 +30,10 @@ public class WebHookHandler {
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+
+        if (body.isEmpty()) {
+            return ResponseEntity.badRequest().build();
         }
 
         String bodyContent = body.toString().trim();
