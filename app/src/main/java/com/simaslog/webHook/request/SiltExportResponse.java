@@ -5,5 +5,5 @@ import java.util.Map;
 
 public record SiltExportResponse(
         String layout,
-        List<Map<String, String>> payload
+        List<Map<String, Object>> payload
 ) {}
