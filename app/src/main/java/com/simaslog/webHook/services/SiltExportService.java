@@ -25,7 +25,7 @@ public class SiltExportService {
             FROM integradorsm.silt_export
             WHERE apikey = ? 
             """ + (layout.isPresent() ? "AND layout = ? " : "") +
-                (exportDate.isPresent() ? "AND date(exported_at) >= ? " : "");
+                (exportDate.isPresent() ? "AND date(exported_at) = ? " : "");
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             int paramIndex = 1;

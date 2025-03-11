@@ -30,7 +30,7 @@ public class SiltExportRequest {
     }
 
     public static boolean auth(String apiKey) {
-        String query = "SELECT COUNT(*) FROM integradorsm.silt_export WHERE apikey = ?";
+        String query = "SELECT COUNT(*) FROM integradorsm.api_keys WHERE apikey = ?";
 
         try {
              PreparedStatement stmt = connection.prepareStatement(query);

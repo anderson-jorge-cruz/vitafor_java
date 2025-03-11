@@ -5,6 +5,7 @@ import com.simaslog.webHook.request.SiltExportResponse;
 import com.simaslog.webHook.services.SiltExportService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.apache.coyote.Response;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,8 +60,12 @@ public class ApiHandler {
 
             Optional<String> layoutOpt = Optional.ofNullable(layout);
             Optional<Date> dataOpt = Optional.empty();
-            if (exportDate != null) {
-                dataOpt = Optional.of(java.sql.Date.valueOf(exportDate));
+            if (exportDate != null && !exportDate.isEmpty()) {
+                try {
+                    dataOpt = Optional.of(java.sql.Date.valueOf(exportDate));
+                } catch (IllegalArgumentException e) {
+                    return ResponseEntity.badRequest().build();
+                }
             }
 
             List<SiltExportResponse> result = service.exportData(ApiKey, layoutOpt, dataOpt);
